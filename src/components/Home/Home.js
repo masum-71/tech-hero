@@ -1,10 +1,9 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
-  const courses = useLoaderData();
-
+  
   return (
     <div className="home-bg">
       <div className="d-flex text-center text-white justify-content-center flex-column align-items-center h-100">

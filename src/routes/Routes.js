@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../components/Blog/Blog";
+import Course from "../components/Course/Course";
 import Courses from "../components/Courses/Courses";
 import FAQ from "../components/FAQ/FAQ";
 import Home from "../components/Home/Home";
@@ -14,13 +15,17 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>,
-                loader: () => fetch('https://tect-hero-server.vercel.app/courses')
-                
+                element: <Home></Home>
             },
             {
                 path: '/courses',
-                element: <Courses></Courses>
+                element: <Courses></Courses>,
+                loader: () => fetch('https://tect-hero-server.vercel.app/courses')
+            },
+            {
+                path: '/course/:id',
+                element: <Course></Course>,
+                loader: ({params}) => fetch(`https://tect-hero-server.vercel.app/courses/${params.id}`)
             },
             {
                 path: '/faq',
