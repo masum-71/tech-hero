@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ singleCourse }) => {
   
-  const {id, name, img, price, description} = singleCourse;
+  const {id, name, img, description} = singleCourse;
   return (
     <div className="col-md-4 mb-4">
    <div className="card">
