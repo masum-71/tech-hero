@@ -3,22 +3,20 @@ import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import PdfFile from "../../PdfFile/PdfFile";
 
-
 const Course = () => {
   const course = useLoaderData();
 
   const { id, name, img, description, price } = course;
 
-
-
   return (
     <>
-      <div>
+      <div className="d-flex w-100 justify-content-center">
         <h1 className="text-center mb-4">{name}</h1>
         <PDFDownloadLink
-         document={<PdfFile course = {course}></PdfFile>}
-          fileName="file">
-          <button>Download</button>
+          document={<PdfFile course={course}></PdfFile>}
+          fileName="file"
+        >
+          <button className="btn btn-primary">Download PDF</button>
         </PDFDownloadLink>
       </div>
       <div className="card text-center">
@@ -28,7 +26,7 @@ const Course = () => {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{description}</p>
-          <Link  className="btn btn-primary">Purchase</Link>
+          <Link className="btn btn-primary">Purchase</Link>
         </div>
         <div className="card-footer text-muted">
           <p>Price: ${price}</p>

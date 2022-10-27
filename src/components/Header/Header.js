@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../logo.jpg";
+import ReactSwitch from "react-switch";
+import { Switch } from "@mui/material";
+import { useContext } from "react";
+import { themeContext } from "../../App";
 
 const Header = () => {
+
+  const {theme, toggleTheme} = useContext(themeContext)
   return (
     <nav className="navbar navbar-expand-md bg-light px-4">
       <div className="container-fluid">
@@ -50,7 +56,12 @@ const Header = () => {
             </ul>
           </div>
           <div>
-            
+            <Switch 
+            onChange={toggleTheme} 
+            checked={theme === 'dark'} >
+
+            </Switch>
+            <label htmlFor="">{theme === 'light' ? 'Light' : 'Dark'}</label>
           </div>
         </div>
       </div>
