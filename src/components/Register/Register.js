@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
-  const [error, setError] = useState('')
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   const handelSubmit = (event) => {
     event.preventDefault();
@@ -18,12 +18,24 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-       setError('')
+        setError("");
         form.reset();
+        handleUpdateUserProfile(name, photoURL);
       })
       .catch((error) => {
-        setError(error.message)
+        setError(error.message);
       });
+  };
+
+  const handleUpdateUserProfile = (name, photoURL) => {
+    const profile = {
+      displayName: name,
+      photoURL: photoURL,
+    };
+
+    updateUserProfile(profile)
+      .then(() => {})
+      .catch(() => {});
   };
   return (
     <div className="w-50 mx-auto mt-4 ">
@@ -89,7 +101,7 @@ const Register = () => {
           Already have an Account ? <Link to="/login">Login</Link>
         </p>
         <div id="emailHelp" className="text-danger mt-3 text-center">
-         {error}
+          {error}
         </div>
       </form>
     </div>
