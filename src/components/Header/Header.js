@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../logo.jpg";
-import ReactSwitch from "react-switch";
 import { Switch } from "@mui/material";
 import { useContext } from "react";
 import { themeContext } from "../../App";
+import { AuthContext } from "../../Contexts/AuthProvider";
+import { FaUserAlt } from "react-icons/fa";
+import { Image } from "react-bootstrap";
 
 const Header = () => {
-
-  const {theme, toggleTheme} = useContext(themeContext)
+  const { theme, toggleTheme } = useContext(themeContext);
+  const { user } = useContext(AuthContext);
   return (
     <nav className="navbar navbar-expand-md bg-light px-4">
       <div className="container-fluid">
@@ -53,15 +55,26 @@ const Header = () => {
                   Blog
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
-            <Switch 
-            onChange={toggleTheme} 
-            checked={theme === 'dark'} >
+            <span>{user?.displayName}</span>
 
-            </Switch>
-            <label htmlFor="">{theme === 'light' ? 'Light' : 'Dark'}</label>
+            {user?.photoURL ? (
+             <Image 
+             data-toggle="tooltip" data-placement="top" title={user.displayName}
+             className="ms-2 curser-pointer" style={{height: '40px', cursor: 'pointer'}} roundedCircle src={user.photoURL}></Image>
+            ) : (
+              <FaUserAlt></FaUserAlt>
+            )}
+
+            <Switch onChange={toggleTheme} checked={theme === "dark"}></Switch>
+            <label htmlFor="">{theme === "light" ? "Light" : "Dark"}</label>
           </div>
         </div>
       </div>
