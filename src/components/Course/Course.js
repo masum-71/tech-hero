@@ -10,8 +10,8 @@ const Course = () => {
 
   return (
     <>
-      <div className="d-flex w-100 justify-content-center">
-        <h1 className="text-center mb-4">{name}</h1>
+      <div className="d-flex w-100 justify-content-center align-items-center mb-4">
+        <h1 className="text-center me-2">{name}</h1>
         <PDFDownloadLink
           document={<PdfFile course={course}></PdfFile>}
           fileName="file"
