@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBARKZ4f_1MD6zMjmMry2zTih2vXp2lUpQ",
-  authDomain: "monpura-news.firebaseapp.com",
-  projectId: "monpura-news",
-  storageBucket: "monpura-news.appspot.com",
-  messagingSenderId: "255255393060",
-  appId: "1:255255393060:web:8d733adb06eb3b71ed39b1"
+  apiKey: "AIzaSyCTFXM94zFuWS6RbZK-yo9JKMePFuRExsQ",
+  authDomain: "tech-hero-da85f.firebaseapp.com",
+  projectId: "tech-hero-da85f",
+  storageBucket: "tech-hero-da85f.appspot.com",
+  messagingSenderId: "771357055603",
+  appId: "1:771357055603:web:816c5101233852453aa806",
 };
 
 // Initialize Firebase

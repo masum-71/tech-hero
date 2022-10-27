@@ -10,7 +10,14 @@ import { Image } from "react-bootstrap";
 
 const Header = () => {
   const { theme, toggleTheme } = useContext(themeContext);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+
+  const handleLogOut = () => {
+    logOut()
+    .then(() => {})
+    .catch(() => {})
+  }
   return (
     <nav className="navbar navbar-expand-md bg-light px-4">
       <div className="container-fluid">
@@ -55,22 +62,38 @@ const Header = () => {
                   Blog
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
-              </li>
             </ul>
           </div>
-          <div>
-            <span>{user?.displayName}</span>
-
-            {user?.photoURL ? (
-             <Image 
-             data-toggle="tooltip" data-placement="top" title={user.displayName}
-             className="ms-2 curser-pointer" style={{height: '40px', cursor: 'pointer'}} roundedCircle src={user.photoURL}></Image>
+          <div className="d-flex align-items-center">
+            {user?.uid ? (
+              <>
+                <span>{user?.displayName}</span>
+                {user?.photoURL ? (
+                  <Image
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title={user.displayName}
+                    className="ms-2 curser-pointer"
+                    style={{ height: "40px", cursor: "pointer" }}
+                    roundedCircle
+                    src={user.photoURL}
+                  ></Image>
+                ) : (
+                  <FaUserAlt data-toggle="tooltip"
+                  data-placement="top"
+                  title={user.displayName}
+                  className="ms-2 curser-pointer"></FaUserAlt>
+                )}
+                <button onClick={handleLogOut} className="btn btn-danger ms-2">LogOut</button>
+              </>
             ) : (
-              <FaUserAlt></FaUserAlt>
+              <>
+                <li className="nav-item list-unstyled">
+                  <Link className="nav-link list" to="/login">
+                    Login
+                  </Link>
+                </li>
+              </>
             )}
 
             <Switch onChange={toggleTheme} checked={theme === "dark"}></Switch>

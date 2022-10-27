@@ -1,11 +1,16 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
-const Login = () => {
-    const {providerLogin} = useContext(AuthContext)
 
+
+const Login = () => {
+
+    const {providerLogin, signIn} = useContext(AuthContext)
+
+    const navigate = useNavigate()
     const googleProvider = new GoogleAuthProvider()
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
@@ -15,9 +20,27 @@ const Login = () => {
         })
         .catch(error => console.error(error))
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signIn(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log(user)
+            form.reset()
+            navigate('/')
+        })
+        .catch(error => console.error(error))
+    }
+
   return (
-    <div className="w-50 mx-auto mt-4 ">
-      <form className="card p-4">
+    <div onSubmit={handleSubmit} className="w-50 mx-auto mt-4 ">
+      <form  className="card p-4">
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
@@ -27,10 +50,10 @@ const Login = () => {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            name="email"
+            required
           />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
+          
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
@@ -40,21 +63,17 @@ const Login = () => {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
+            name="password"
+            required
           />
         </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
+        <button type="submit" className="btn btn-primary mb-2">
+          Login
         </button>
+        <p className="text-center">New in here ? <Link to='/register'>Create an Account</Link></p>
+        <div id="emailHelp" className="text-danger mt-3 text-center">
+            We'll never share your email with anyone else.
+          </div>
       </form>
       <div>
         <div className="card mt-3">
