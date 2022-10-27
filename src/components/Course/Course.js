@@ -26,7 +26,7 @@ const Course = () => {
         <div className="card-body">
           <h5 className="card-title">{name}</h5>
           <p className="card-text">{description}</p>
-          <Link className="btn btn-primary">Purchase</Link>
+          <Link to={`/checkout/${id}`} className="btn btn-primary">Purchase</Link>
         </div>
         <div className="card-footer text-muted">
           <p>Price: ${price}</p>
