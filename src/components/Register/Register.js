@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState('')
 
   const handelSubmit = (event) => {
     event.preventDefault();
@@ -17,11 +18,12 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
+       setError('')
         form.reset();
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setError(error.message)
+      });
   };
   return (
     <div className="w-50 mx-auto mt-4 ">
@@ -87,7 +89,7 @@ const Register = () => {
           Already have an Account ? <Link to="/login">Login</Link>
         </p>
         <div id="emailHelp" className="text-danger mt-3 text-center">
-          We'll never share your email with anyone else.
+         {error}
         </div>
       </form>
     </div>

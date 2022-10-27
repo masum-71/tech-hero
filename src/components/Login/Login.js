@@ -1,5 +1,6 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext } from "react";
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
@@ -7,6 +8,8 @@ import { AuthContext } from "../../Contexts/AuthProvider";
 
 
 const Login = () => {
+
+    const [error, setError] = useState('')
 
     const {providerLogin, signIn} = useContext(AuthContext)
 
@@ -33,9 +36,13 @@ const Login = () => {
             const user = result.user;
             console.log(user)
             form.reset()
+            setError('')
             navigate('/')
         })
-        .catch(error => console.error(error))
+        .catch(error => {
+            console.error(error)
+            setError(error.message)
+        })
     }
 
   return (
@@ -72,7 +79,9 @@ const Login = () => {
         </button>
         <p className="text-center">New in here ? <Link to='/register'>Create an Account</Link></p>
         <div id="emailHelp" className="text-danger mt-3 text-center">
-            We'll never share your email with anyone else.
+           
+            {error}
+           
           </div>
       </form>
       <div>
