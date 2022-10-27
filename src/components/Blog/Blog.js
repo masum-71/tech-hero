@@ -32,7 +32,8 @@ const Blog = () => {
           running quickly & securely with fully managed backend infrastructure.
           Monitor App Performance. Backed by Google. Cross-Platform Solutions.{" "}
           <br />
-          The best Firebase alternatives
+        </p>
+        The best Firebase alternatives
           <ol>
             <li>Back4App </li>
             <li>Backendless</li>
@@ -45,7 +46,6 @@ const Blog = () => {
             <li>AWS Amplify</li>
             <li>Heroku</li>
           </ol>
-        </p>
       </div>
       <div>
         <h1>
